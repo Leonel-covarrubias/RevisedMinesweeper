@@ -12,7 +12,7 @@ jobs:
             pip install pytest coverage
       - run:
           name: Run unit tests
-          command: pytest  test.py
+          command: pytest test.py
       - run:
           name: Generate coverage report
           command: coverage run --source=. -m pytest test.py && coverage report
@@ -26,7 +26,7 @@ jobs:
           command: |
             curl https://cli-assets.heroku.com/install.sh | sh
       - run:
-          name: Login to Heroku
+          name: Login to Heroku Registry
           command: echo "c044400f-b29a-4f4e-b40b-ee80106b482c" | docker login --username=_ --password-stdin registry.heroku.com
       - run:
           name: Deploy to Heroku
