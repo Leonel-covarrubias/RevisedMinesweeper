@@ -27,7 +27,7 @@ jobs:
             curl https://cli-assets.heroku.com/install.sh | sh
       - run:
           name: Login to Heroku
-          command: heroku login -i
+          command: echo "c044400f-b29a-4f4e-b40b-ee80106b482c" | docker login --username=_ --password-stdin registry.heroku.com
       - run:
           name: Deploy to Heroku
           command: heroku container:push web -a minesweeper-ish && heroku container:release web -a minesweeper-ish
@@ -41,4 +41,3 @@ workflows:
           filters:
             branches:
               only: main
-
