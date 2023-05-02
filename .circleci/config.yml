@@ -12,10 +12,10 @@ jobs:
             pip install pytest coverage
       - run:
           name: Run unit tests
-          command: pytest test.py
+          command: pytest  test.py
       - run:
           name: Generate coverage report
-          command: coverage run --source=Minesweeper.py -m pytest test.py && coverage report
+          command: coverage run --source=. -m pytest test.py && coverage report
 
 workflows:
   build-and-test:
