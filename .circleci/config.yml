@@ -16,8 +16,29 @@ jobs:
       - run:
           name: Generate coverage report
           command: coverage run --source=. -m pytest test.py && coverage report
-
+  deploy:
+    docker:
+      - image: circleci/python:3.8.3
+    steps:
+      - checkout
+      - run:
+          name: Install Heroku CLI
+          command: |
+            curl https://cli-assets.heroku.com/install.sh | sh
+      - run:
+          name: Login to Heroku
+          command: heroku login -i
+      - run:
+          name: Deploy to Heroku
+          command: heroku container:push web -a minesweeper-ish && heroku container:release web -a minesweeper-ish
 workflows:
   build-and-test:
     jobs:
       - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
+
